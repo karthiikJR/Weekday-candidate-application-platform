@@ -15,7 +15,7 @@ const description =
 function JobCard() {
 	const [expanded, setExpanded] = useState(false);
 
-	const handleExpandClick = () => {
+	const UpdateExpanded = () => {
 		setExpanded(!expanded);
 	};
 	return (
@@ -75,7 +75,7 @@ function JobCard() {
 					{description.length > 200 && (
 						<Button
 							sx={{ rotate: expanded ? "180deg" : "0deg" }}
-							onClick={handleExpandClick}
+							onClick={UpdateExpanded}
 						>
 							<ExpandMoreIcon />
 						</Button>
