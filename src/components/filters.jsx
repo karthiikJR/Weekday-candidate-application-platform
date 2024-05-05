@@ -6,7 +6,7 @@ import Stack from "@mui/material/Stack";
 
 import * as data from "../data/dropdown-options";
 
-function Filters({ setFilters }) {
+function Filters({setFilters}) {
 	// Functions handling all the event changes in filters
 	const handleRolesChange = (event, value) => {
 		setFilters((prevFilters) => ({

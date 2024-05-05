@@ -20,7 +20,7 @@ function JobCard({ job }) {
 	};
 
 	return (
-		<Card sx={{ maxWidth: 345, height: "fit-content" }}>
+		<Card className="card">
 			<CardContent sx={{ position: "relative" }}>
 				{/* Company name, role and location */}
 				<Stack spacing={1} direction={"row"}>
