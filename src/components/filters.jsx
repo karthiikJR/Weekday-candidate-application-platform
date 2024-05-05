@@ -1,13 +1,54 @@
-import React from "react";
+import React, { useState } from "react";
 import { TextField, Autocomplete, MenuItem } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 import * as data from "../data/dropdown-options";
 import Stack from "@mui/material/Stack";
 
-function Filters() {
-	const handleAutocompleteChange = (event, value) => {
-		console.log(value);
+function Filters({setFilters}) {
+	
+
+	const handleRolesChange = (event, value) => {
+		setFilters((prevFilters) => ({
+			...prevFilters,
+			roles: value || [],
+		}));
 	};
+
+	const handleExperienceChange = (event, value) => {
+		setFilters((prevFilters) => ({
+			...prevFilters,
+			experience: value || 0,
+		}));
+	};
+
+	const handleRemoteChange = (event, value) => {
+		setFilters((prevFilters) => ({
+			...prevFilters,
+			remote: value || "on-site",
+		}));
+	};
+
+	const handleSalaryChange = (event, value) => {
+		setFilters((prevFilters) => ({
+			...prevFilters,
+			minBasePay: value || 0,
+		}));
+	};
+
+	const handleCompanyNameChange = (event) => {
+		setFilters((prevFilters) => ({
+			...prevFilters,
+			companyName: event.target.value,
+		}));
+	};
+
+	const handleLocationChange = (event) => {
+		setFilters((prevFilters) => ({
+			...prevFilters,
+			location: event.target.value,
+		}));
+	};
+
 	return (
 		<Stack
 			sx={{ fontSize: "0.5rem" }}
@@ -20,7 +61,7 @@ function Filters() {
 				sx={{ m: 1, minWidth: 150, fontSize: "0.5rem" }}
 				multiple
 				options={data.roles}
-				onChange={handleAutocompleteChange}
+				onChange={handleRolesChange}
 				groupBy={(option) => option.type}
 				getOptionLabel={(option) => option.data}
 				renderInput={(params) => (
@@ -33,8 +74,8 @@ function Filters() {
 				)}
 				renderOption={(props, option, { selected }) => (
 					<MenuItem
+						key={option}
 						{...props}
-						key={option.data}
 						value={option.data}
 						sx={{ justifyContent: "space-between", fontSize: "0.75rem" }}
 					>
@@ -48,7 +89,7 @@ function Filters() {
 			<Autocomplete
 				sx={{ m: 1, minWidth: 150 }}
 				options={data.experience}
-				onChange={handleAutocompleteChange}
+				onChange={handleExperienceChange}
 				getOptionLabel={(option) => String(option)}
 				renderInput={(params) => (
 					<TextField {...params} variant="outlined" placeholder="Experience" />
@@ -70,7 +111,7 @@ function Filters() {
 			<Autocomplete
 				sx={{ m: 1, minWidth: 150 }}
 				options={data.location}
-				onChange={handleAutocompleteChange}
+				onChange={handleRemoteChange}
 				getOptionLabel={(option) => String(option)}
 				renderInput={(params) => (
 					<TextField {...params} variant="outlined" placeholder="Remote" />
@@ -88,11 +129,11 @@ function Filters() {
 				)}
 			/>
 
-			{/* Work place */}
+			{/* Salary */}
 			<Autocomplete
 				sx={{ m: 1, minWidth: 250 }}
 				options={data.salary}
-				onChange={handleAutocompleteChange}
+				onChange={handleSalaryChange}
 				getOptionLabel={(option) => String(option)}
 				renderInput={(params) => (
 					<TextField
@@ -118,6 +159,7 @@ function Filters() {
 			<TextField
 				sx={{ m: 1 }}
 				required
+				onChange={handleCompanyNameChange}
 				id="outlined-required"
 				placeholder="Company Name"
 			/>
@@ -126,6 +168,7 @@ function Filters() {
 			<TextField
 				sx={{ m: 1 }}
 				required
+				onChange={handleLocationChange}
 				id="outlined-required"
 				placeholder="Location"
 			/>
