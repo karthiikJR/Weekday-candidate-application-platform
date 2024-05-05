@@ -5,6 +5,7 @@ export function filterData(filters, initialState, jobs) {
 		return jobs.filter((job) => {
 			let isJobIncluded = true;
 			const dataOnly = filters.roles.map((role) => role.data.toLowerCase());
+
 			if (dataOnly.length > 0) {
 				isJobIncluded =
 					isJobIncluded && dataOnly.includes(job.jobRole.toLowerCase());
@@ -36,29 +37,25 @@ export function filterData(filters, initialState, jobs) {
 
 			if (
 				filters.location.toLowerCase() !== "remote" &&
-				filters.remote !== ""
+				filters.remote.toLowerCase() === "on-site"
 			) {
 				isJobIncluded =
 					isJobIncluded && job.location.toLowerCase() !== "remote";
+				console.log(isJobIncluded, "next one");
 			}
 
 			if (filters.remote.toLowerCase() === "remote") {
+				console.log("remote", job.location, filters.remote.toLowerCase());
 				isJobIncluded = isJobIncluded && job.location === "remote";
 			}
-			console.log(Number(filters.minBasePay.split("L")[0]));
-			if (Number(filters.minBasePay.split("L")[0]) > 0) {
-				const sal = Number(filters.minBasePay.split("L")[0]);
-				console.log(
-					"inside",
-					Number(job.minJdSalary),
-					sal,
-					Number(job.maxJdSalary)
-				);
+			if (Number(filters.minBasePay) > 0) {
+				const sal = Number(filters.minBasePay);
 				isJobIncluded =
 					isJobIncluded &&
 					sal >= (Number(job.minJdSalary) | 0) &&
 					sal <= (Number(job.maxJdSalary) | Infinity);
 			}
+			console.log(isJobIncluded);
 			return isJobIncluded;
 		});
 	}

@@ -149,7 +149,7 @@ function Filters({setFilters}) {
 						value={option}
 						sx={{ justifyContent: "space-between", fontSize: "0.75rem" }}
 					>
-						{option}
+						{option + "L"}
 						{selected ? <CheckIcon color="info" /> : null}
 					</MenuItem>
 				)}
