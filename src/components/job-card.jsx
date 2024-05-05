@@ -43,7 +43,11 @@ function JobCard({ job }) {
 							{job.companyName}
 						</Typography>
 						<Typography
-							sx={{ textAlign: "left", textTransform: "capitalize" }}
+							sx={{
+								textAlign: "left",
+								textTransform: "capitalize",
+								fontWeight: "bold",
+							}}
 							variant="caption"
 						>
 							{job.jobRole}
