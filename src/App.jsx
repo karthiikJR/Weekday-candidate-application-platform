@@ -65,12 +65,10 @@ function App() {
 	}, [filters]);
 
 	const scrollHandler = () => {
-		console.log("scrolling");
 		if (
 			window.innerHeight + Math.round(window.scrollY) >=
 			document.body.offsetHeight - 2
 		) {
-			console.log("scroll end");
 			dispatch(fetchJobs()).then(() => {
 				dispatch(setOffset());
 			});
@@ -97,7 +95,7 @@ function App() {
 						{error && <p>Error: {error}</p>}
 						{jobs &&
 							jobs.length > 0 &&
-							job.map((job) => <JobCard key={job.id} job={job} />)}
+							job.map((job) => <JobCard key={job.jdUid} job={job} />)}
 					</Stack>
 				</Stack>
 

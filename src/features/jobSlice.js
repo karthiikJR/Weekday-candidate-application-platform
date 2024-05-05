@@ -4,7 +4,6 @@ export const fetchJobs = createAsyncThunk(
 	"job/fetchJobs",
 	async (object, { getState, rejectWithValue }) => {
 		const offset = Number(getState().offset);
-		console.log("offset", offset);
 
 		try {
 			const response = await fetch(

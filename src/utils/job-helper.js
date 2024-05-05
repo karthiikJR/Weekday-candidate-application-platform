@@ -41,11 +41,9 @@ export function filterData(filters, initialState, jobs) {
 			) {
 				isJobIncluded =
 					isJobIncluded && job.location.toLowerCase() !== "remote";
-				console.log(isJobIncluded, "next one");
 			}
 
 			if (filters.remote.toLowerCase() === "remote") {
-				console.log("remote", job.location, filters.remote.toLowerCase());
 				isJobIncluded = isJobIncluded && job.location === "remote";
 			}
 			if (Number(filters.minBasePay) > 0) {
@@ -55,7 +53,6 @@ export function filterData(filters, initialState, jobs) {
 					sal >= (Number(job.minJdSalary) | 0) &&
 					sal <= (Number(job.maxJdSalary) | Infinity);
 			}
-			console.log(isJobIncluded);
 			return isJobIncluded;
 		});
 	}
