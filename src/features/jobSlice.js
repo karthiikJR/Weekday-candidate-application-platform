@@ -30,14 +30,6 @@ export const fetchJobs = createAsyncThunk(
 
 const initialState = {
 	jobs: [],
-	filters: {
-		roles: [],
-		experience: 0,
-		companyName: "",
-		location: "",
-		remote: false,
-		minBasePay: 0,
-	},
 	offset: 1,
 	loading: false,
 	error: null,
