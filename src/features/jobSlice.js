@@ -4,6 +4,7 @@ export const fetchJobs = createAsyncThunk(
 	"job/fetchJobs",
 	async (object, { getState, rejectWithValue }) => {
 		const offset = Number(getState().offset);
+		console.log("offset", offset);
 
 		try {
 			const response = await fetch(
@@ -15,7 +16,7 @@ export const fetchJobs = createAsyncThunk(
 					},
 					body: JSON.stringify({
 						limit: 10,
-						offset: offset,
+						offset: offset + 1,
 					}),
 				}
 			);
@@ -49,6 +50,9 @@ const jobSlice = createSlice({
 		setFilters: (state, action) => {
 			state.filters = action.payload;
 		},
+		setOffset: (state) => {
+			state.offset += 1;
+		},
 	},
 	extraReducers: (builder) => {
 		builder
@@ -68,6 +72,6 @@ const jobSlice = createSlice({
 	},
 });
 
-export const { setFilters } = jobSlice.actions;
+export const { setFilters, setOffset } = jobSlice.actions;
 
 export default jobSlice.reducer;

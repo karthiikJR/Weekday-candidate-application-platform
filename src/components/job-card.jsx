@@ -9,23 +9,22 @@ import Avatar from "@mui/material/Avatar";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Link from "@mui/material/Link";
 
-const description =
-	"This is a sample job and you must have displayed it to understand that its not just some random lorem ipsum text but something which was manually written. Oh well, if random text is what you were looking for then here it is: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages and now in this assignment.";
-
-function JobCard() {
+function JobCard({ job }) {
 	const [expanded, setExpanded] = useState(false);
+
+	const description = job.jobDetailsFromCompany;
 
 	const UpdateExpanded = () => {
 		setExpanded(!expanded);
 	};
 	return (
-		<Card sx={{ maxWidth: 345 }}>
+		<Card sx={{ maxWidth: 345, height: "fit-content" }}>
 			<CardContent sx={{ position: "relative" }}>
 				{/* Company name, role and location */}
 				<Stack spacing={1} direction={"row"}>
 					<Avatar
 						alt="Remy Sharp"
-						src="https://logo.clearbit.com/dropbox.com"
+						src={job.logoUrl}
 						sx={{ width: 40, height: 40 }}
 					/>
 					<Stack direction={"column"}>
@@ -39,23 +38,34 @@ function JobCard() {
 							}}
 							variant="h3"
 						>
-							Dropbox
-						</Typography>
-						<Typography sx={{ textAlign: "left" }} variant="caption">
-							Frontend
+							{job.companyName}
 						</Typography>
 						<Typography
-							sx={{ textAlign: "left", fontSize: "0.625rem" }}
+							sx={{ textAlign: "left", textTransform: "capitalize" }}
 							variant="caption"
 						>
-							Delhi
+							{job.jobRole}
+						</Typography>
+						<Typography
+							sx={{
+								textAlign: "left",
+								fontSize: "0.625rem",
+								textTransform: "capitalize",
+							}}
+							variant="caption"
+						>
+							{job.location}
 						</Typography>
 					</Stack>
 				</Stack>
 
 				{/* Salary */}
 				<Typography variant="caption" color="text.secondary" gutterBottom>
-					Estimated salary: <strong>18-35 LPA</strong> ✅
+					Estimated salary:{" "}
+					<strong>
+						{job.minJdSalary} - {job.maxJdSalary} {job.salaryCurrencyCode}
+					</strong>{" "}
+					✅
 				</Typography>
 
 				{/* Job Description:  */}
@@ -84,7 +94,7 @@ function JobCard() {
 
 				{/* Job Description link */}
 				<Link
-					href="#"
+					href={job.jdLink}
 					sx={{
 						fontFamily: "lexend",
 						textAlign: "center",
@@ -110,13 +120,13 @@ function JobCard() {
 						color="text.secondary"
 						gutterBottom
 					>
-						Minimum Experience
+						Experience
 					</Typography>
 					<Typography
 						sx={{ textAlign: "left", fontSize: "0.75rem" }}
 						variant="caption"
 					>
-						2 years
+						{job.minExp} years - {job.maxExp} years
 					</Typography>
 				</>
 			</CardContent>
