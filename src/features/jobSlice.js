@@ -3,14 +3,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const fetchJobs = createAsyncThunk(
 	"job/fetchJobs",
 	async (object, { getState, rejectWithValue }) => {
-		console.log("check check", object, getState());
 		const offset = Number(getState().offset);
-		console.log(
-			JSON.stringify({
-				limit: 10,
-				offset,
-			})
-		);
+
 		try {
 			const response = await fetch(
 				"https://api.weekday.technology/adhoc/getSampleJdJSON",
@@ -26,7 +20,6 @@ export const fetchJobs = createAsyncThunk(
 				}
 			);
 			const data = await response.json();
-			console.log(data.jdList);
 			return data.jdList;
 		} catch (error) {
 			return rejectWithValue(error);
@@ -66,7 +59,6 @@ const jobSlice = createSlice({
 			.addCase(fetchJobs.fulfilled, (state, action) => {
 				state.loading = false;
 				state.error = null;
-				console.log(action);
 				state.jobs = [...state.jobs, ...action.payload];
 			})
 			.addCase(fetchJobs.rejected, (state, action) => {
