@@ -105,11 +105,7 @@ function App() {
 					</Stack>
 				</Stack>
 
-				{loading && (
-					<Typography sx={{ p: "10px", textAlign: "center" }} variant="h1">
-						Loading...
-					</Typography>
-				)}
+				{loading && <div class="spinner"></div>}
 			</Layout>
 		</ThemeProvider>
 	);
