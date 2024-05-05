@@ -1,16 +1,19 @@
 import "./App.css";
 
+import { useEffect, useState } from "react";
+
+import { useDispatch, useSelector } from "react-redux";
+
+import { Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import Layout from "./components/Layout";
 import Filters from "./components/filters";
+import JobCard from "./components/job-card";
 
 import { fetchJobs, setOffset } from "./features/jobSlice";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import JobCard from "./components/job-card";
-import { Typography } from "@mui/material";
+
 import { filterData } from "./utils/job-helper";
 
 const THEME = createTheme({
@@ -25,6 +28,8 @@ const THEME = createTheme({
 
 function App() {
 	const dispatch = useDispatch();
+
+	// Initial state for filters
 	const initialState = {
 		roles: [],
 		experience: 0,
@@ -33,25 +38,30 @@ function App() {
 		remote: "",
 		minBasePay: 0,
 	};
+
+	// Setting up filters and job state
 	const [filters, setFilters] = useState(initialState);
 	const [job, setJob] = useState([]);
 
+	// Getting the jobs, loading and error state from the store
 	const jobs = useSelector((state) => state.jobs);
-
 	const loading = useSelector((state) => state.loading);
 	const error = useSelector((state) => state.error);
 
-	useEffect(() => {
-		const filteredJobs = filterData(filters, initialState, jobs);
-		setJob(filteredJobs);
-	}, [jobs]);
-
+	// Initial fetch of jobs
 	useEffect(() => {
 		dispatch(fetchJobs()).then(() => {
 			dispatch(setOffset());
 		});
 	}, []);
 
+	// Updating UI based on filters
+	useEffect(() => {
+		const filteredJobs = filterData(filters, initialState, jobs);
+		setJob(filteredJobs);
+	}, [jobs, filters]);
+
+	// Infinite scroll
 	useEffect(() => {
 		window.addEventListener("scroll", scrollHandler);
 		return () => {
@@ -59,11 +69,7 @@ function App() {
 		};
 	}, []);
 
-	useEffect(() => {
-		const filteredJobs = filterData(filters, initialState, jobs);
-		setJob(filteredJobs);
-	}, [filters]);
-
+	// Infinite scroll handler
 	const scrollHandler = () => {
 		if (
 			window.innerHeight + Math.round(window.scrollY) >=
