@@ -1,12 +1,13 @@
-import React, { useState } from "react";
-import { TextField, Autocomplete, MenuItem } from "@mui/material";
+import React from "react";
+
 import CheckIcon from "@mui/icons-material/Check";
-import * as data from "../data/dropdown-options";
+import { Autocomplete, MenuItem, TextField } from "@mui/material";
 import Stack from "@mui/material/Stack";
 
-function Filters({setFilters}) {
-	
+import * as data from "../data/dropdown-options";
 
+function Filters({ setFilters }) {
+	// Functions handling all the event changes in filters
 	const handleRolesChange = (event, value) => {
 		setFilters((prevFilters) => ({
 			...prevFilters,

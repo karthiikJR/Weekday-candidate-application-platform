@@ -10,6 +10,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Link from "@mui/material/Link";
 
 function JobCard({ job }) {
+	// Expand job description
 	const [expanded, setExpanded] = useState(false);
 
 	const description = job.jobDetailsFromCompany;
@@ -17,6 +18,7 @@ function JobCard({ job }) {
 	const UpdateExpanded = () => {
 		setExpanded(!expanded);
 	};
+
 	return (
 		<Card sx={{ maxWidth: 345, height: "fit-content" }}>
 			<CardContent sx={{ position: "relative" }}>
@@ -130,6 +132,8 @@ function JobCard({ job }) {
 					</Typography>
 				</>
 			</CardContent>
+
+			{/* Apply button */}
 			<CardActions>
 				<Button
 					sx={{ width: "100%", bgcolor: "#55efc4", color: "black" }}
