@@ -1,8 +1,44 @@
-# React + Vite
+# Weekday Candidate Application Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+As the project was small, I didn't add the API endpoint to the .env file.
 
-Currently, two official plugins are available:
+Due to the unavailability of Tech stack data from the API request, the tech stack filter could not be added.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Getting Started
+
+To run the project locally, follow these steps:
+
+1. Download the ZIP file or clone it locally:
+
+```bash
+git clone <repository-url>
+```
+
+2. Navigate to the project folder:
+
+3. Open the terminal in that folder and install all the dependencies:
+
+```bash
+npm install
+```
+
+4. After installation, run the project locally:
+
+```bash
+npm run dev
+```
+
+5. Finally, open your favourite browser and go to [http://localhost:5173/](http://localhost:5173/) to view the platform.
+
+## Usage
+
+- Use the search bar to find specific job listings.
+- Use the filters to refine job listings based on different criteria.
+- Scroll down the page to automatically load more job listings using infinite scroll.
+
+## Technologies Used
+
+- React.js (Frontend Framework)
+- Redux toolkit (State Management)
+- CSS & MUI (for styling)
+- In-built fetch call (for API requests)
